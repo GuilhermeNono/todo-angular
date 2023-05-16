@@ -21,12 +21,19 @@ ser realizada" ngModel name="task" required >
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let task of taskArray; index as i">
-      <th scope="row">{{i+1}}</th>
-      <td>{{task.taskname}}</td>
-      <td><input type="checkbox" (change)="onCheck(i)"> Finalizado</td>
-      <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Excluir</button></td>
+    <tr *ngIf="taskArray.length == 0; else elseBlock">
+      <td colspan="4">
+        <h4 class="text-center">Adicione as tarefas.</h4>
+      </td>
     </tr>
+    <ng-template #elseBlock>
+      <tr *ngFor="let task of taskArray; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{task.taskname}}</td>
+        <td><input type="checkbox" (change)="onCheck(i)"> Finalizado</td>
+        <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Excluir</button></td>
+      </tr>
+    </ng-template>
   </tbody>
 </table>
 </div>

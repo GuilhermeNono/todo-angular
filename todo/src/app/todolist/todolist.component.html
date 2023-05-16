@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="text-center display-4 mt-5 mb-2" >Etec - Lista de Tarefa</h1>
+  <hr />
+  <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm" class="col-md-6 offset-md-3">
+    <div class="mb-3">
+      <label for="task" class="form-label">Tarefas</label>
+      <input type="text" class="form-control" id="task" placeholder="Digite a tarefa a
+ser realizada" ngModel name="task" required >
+      <small *ngIf="taskForm.invalid && taskForm.dirty" id="task" class="text-danger">Campo obrigatório</small>
+    </div>
+  <button [disabled]="taskForm.invalid" type="submit" class="btn btn-primary">Adicionar tarefa</button>
+</form>
+<hr />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tarefa</th>
+      <th scope="col">Status</th>
+      <th scope="col">Excluir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of taskArray; index as i">
+      <th scope="row">{{i+1}}</th>
+      <td>{{task.taskname}}</td>
+      <td><input type="checkbox" (change)="onCheck(i)"> Finalizado</td>
+      <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Excluir</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
